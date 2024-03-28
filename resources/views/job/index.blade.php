@@ -1,7 +1,11 @@
 <x-layout>
     @foreach ($jobs as $job)
-    <x-card>
-        {{$job->title}}
-    </x-card>
+    <x-job-card class="mb-4" :$job>
+      <div class="mt-4">
+        <x-link-button :href="route('jobs.show', $job)" >
+              View
+            </x-link-button>
+        </div>
+    </x-job-card>
     @endforeach
 </x-layout>
