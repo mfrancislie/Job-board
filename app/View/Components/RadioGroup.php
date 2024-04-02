@@ -14,9 +14,24 @@ class RadioGroup extends Component
     public function __construct(
         public string $name,
         public array $options
+
+         // ['entry' => 'entry', 'senior']
+        // 0,        1
+
+        // ['Entry' => 'entry', 'Senior' => 'senior']
     )
     {
         //
+    }
+
+    public function optionalWithLabels(): array {
+ /* 
+        In this case if array is released, which means it's not an associative array, we will use another function called
+        array combine. 
+        array combine it create an array where you specifically pass the keys and then the values.
+*/
+       return array_is_list($this->options) ? 
+       array_combine($this->options, $this->options) : $this->options;
     }
 
     /**
