@@ -10,6 +10,23 @@ class JobController extends Controller
     /**
      * Display a listing of the resource.
      */
+
+     public function index()
+    {
+       $filters = request()->only(
+            'search',
+            'min_salary',
+            'max_salary',
+            'experience',
+            'category'
+        );
+
+        return view('job.index', ['jobs' => Job::filter($filters)->get()]);
+    } 
+
+
+    /* 
+    before filtering backend logic
     public function index()
     {
         $jobs = Job::query();
@@ -28,7 +45,8 @@ class JobController extends Controller
         });
 
         return view('job.index', ['jobs' =>  $jobs->get()]);
-    }
+    } 
+    */
 
     /**
      * Show the form for creating a new resource.
