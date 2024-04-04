@@ -10,6 +10,12 @@
 <body class="from-10% via-30% to-90%
  mx-auto mt-10 max-w-3xl bg-gradient-to-r 
  from-indigo-100 via-sky-100 to-emerald-100 text-slate-700">
+
+ {{-- if the not yet login gues will display --}}
+ {{ auth()->user()->name ?? 'Guest' }}
+
+
+ 
    {{$slot}}
 </body>
 </html>
