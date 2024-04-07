@@ -52,4 +52,14 @@ class Job extends Model
     {
         return $this->hasMany(JobApplication::class);
     }
+
+
+    public function hasUserApplied(Authenticatable|User|int $user): bool
+    {
+        return $this->where('id', $this->id)
+            ->whereHas(
+                'jobApplications',
+                fn($query) => $query->where('user_id', '=', $user->id ?? $user)
+            )->exists();
+    }
 }
