@@ -14,8 +14,14 @@ class MyJobApplicationController extends Controller
         return view(
             'my_job_application.index',
             [
-                'applications' => auth()->user()->jobApplications()
-                ->with(['job', 'job.employer']) // Eager load job and employer details
+                'applications' => auth()->user()->jobApplications()// to retrieve all the job application
+                ->with(
+                    [
+                        'job' => fn($query) => $query->withCount('jobApplications')// to count total number of applicants
+                            ->withAvg('jobApplications', 'expected_salary'),// to calculate the average expected salary of all applicants
+                        'job.employer'
+                    ]
+                ) 
                 ->latest()
                 ->get()
             ]
