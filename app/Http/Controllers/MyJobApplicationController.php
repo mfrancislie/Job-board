@@ -27,8 +27,9 @@ class MyJobApplicationController extends Controller
                 ->get()
             ]
         );
-    }
     
+    }
+
 
 
  /**

@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('location');
             $table->string('category');
             $table->enum('experience', Job::$experience);
+            $table->foreignId('employer_id')->constrained()->onDelete('cascade');
             // $table->enum('experience', ['entry', 'intermediate', 'senior']);
             $table->timestamps();
         });

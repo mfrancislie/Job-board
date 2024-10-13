@@ -21,6 +21,16 @@ class Job extends Model
         'Marketing'
     ];
 
+    protected $fillable = [
+        'title',
+        'description',
+        'salary',
+        'location',
+        'category',
+        'experience',
+        'employer_id', // Assuming you have a foreign key for the employer
+    ];
+
     public function employer(): BelongsTo
     {
         return $this->belongsTo(Employer::class);

@@ -22,5 +22,11 @@ class Employer extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    // Add this method to allow an employer to create a job
+    public function createJob(array $data): Job
+    {
+        return $this->jobs()->create($data);
+    }
 }
 

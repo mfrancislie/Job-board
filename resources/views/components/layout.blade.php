@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Job Board</title>
-    @vite('resources/css/app.css', 'resources/js/app.js')
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="from-10% via-30% to-90%
  mx-auto mt-10 max-w-3xl bg-gradient-to-r 
@@ -27,16 +27,18 @@
 
     <ul class="flex space-x-2">
       @auth
-        <li>
-          <a href="{{ route('my-job-applications.index') }}">
-            {{ auth()->user()->name ?? 'Anynomus' }}: Applications
-          </a>
-        </li>
-        <li>
-          <a href="{{ route('my-jobs.index') }}">
-           My Jobs
-          </a>
-        </li>
+       <li>
+        <a href="{{ auth()->user()->employer ? route('employer.index') : route('my-job-applications.index') }}">
+          {{ auth()->user()->name ?? 'Anonymous' }}: Applications
+        </a>
+      </li>
+        @if(auth()->user()->employer) {{-- Check if the user is an employer --}}
+          <li>
+            <a href="{{ route('my-jobs.index') }}">
+              My Jobs
+            </a>
+          </li>
+        @endif
         <li>
           <form action="{{ route('auth.destroy') }}" method="POST">
             @csrf

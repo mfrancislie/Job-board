@@ -31,7 +31,15 @@ Route::middleware('auth')->group(function () {
     Route::resource('employer', EmployerController::class)
             ->only(['create', 'store']);           
 
-    Route::resource('my-jobs', MyJobController::class);
-                          
+    // adding middleware that will check if user is authenticated
+    // and then if he is also an employer
+    Route::middleware(['employer'])->group(function () {
+
+        Route::resource('my-jobs', MyJobController::class); 
+
+        Route::get('employer/applications', [EmployerController::class, 'index'])->name('employer.index');
+        
+    });
 });
 
+// ... existing code ...
